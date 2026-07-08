@@ -41,6 +41,11 @@ body {
   color: var(--black);
   background: var(--white);
   overflow-x: hidden;
+  /* Chiffres alignés tabulaires (équivalent du réglage Illustrator) :
+     corrige les chiffres old-style disproportionnés de Raleway.
+     Hérité par tous les éléments de la page. */
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
