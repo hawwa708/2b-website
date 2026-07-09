@@ -277,61 +277,54 @@ function initPillarCarousels() {
   });
 }
 
-/* ---------- Curseur canvas : lueur orange sur fonds sombres uniquement ---------- */
+/* ----------------------------------------------------------------------
+   Curseur "eau irisée" — simulation de fluide WebGL sur tout le site.
+   La souris laisse une tache liquide translucide aux reflets irisés qui
+   se déforme et se dissipe, comme un film d'eau savonneuse.
+   Librairie : webgl-fluid (assets/js/vendor/webgl-fluid.umd.js).
+   ---------------------------------------------------------------------- */
 function initCursorGlow() {
   const canvas = document.getElementById('cursor-glow');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let w, h;
-  let particles = [];
-  let active = false;
+  if (!canvas || typeof WebGLFluid === 'undefined') return;
 
-  function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  window.addEventListener('mousemove', (e) => {
-    if (!active) return;
-    particles.push({ x: e.clientX, y: e.clientY, life: 1 });
-    if (particles.length > 40) particles.shift();
-  });
-
-  function loop() {
-    ctx.clearRect(0, 0, w, h);
-    if (active) {
-      particles.forEach((p) => {
-        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 90);
-        gradient.addColorStop(0, `rgba(226, 91, 59, ${0.35 * p.life})`);
-        gradient.addColorStop(1, 'rgba(226, 91, 59, 0)');
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 90, 0, Math.PI * 2);
-        ctx.fill();
-        p.life -= 0.035;
-      });
-      particles = particles.filter((p) => p.life > 0);
-    }
-    requestAnimationFrame(loop);
-  }
-  loop();
-
-  const darkTargets = () => document.querySelectorAll('.is-dark, .hero-vignette-fixed.is-full');
-
-  function evaluate(e) {
-    const els = darkTargets();
-    let over = false;
-    els.forEach((el) => {
-      const r = el.getBoundingClientRect();
-      if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) {
-        over = true;
-      }
+  try {
+    WebGLFluid(canvas, {
+      TRIGGER: 'hover',        // réagit au simple survol, pas besoin de cliquer
+      IMMEDIATE: false,        // pas de splash aléatoire au chargement
+      AUTO: false,             // pas de splash automatique périodique
+      SIM_RESOLUTION: 128,
+      DYE_RESOLUTION: 1024,
+      DENSITY_DISSIPATION: 1.8,   // le film d'eau persiste un peu puis s'évapore
+      VELOCITY_DISSIPATION: 2.8,  // le mouvement s'amortit vite → pas de volutes de fumée
+      PRESSURE: 0.85,             // fluide plus "incompressible" → comportement liquide
+      CURL: 2,                    // quasi pas de turbulence (la fumée vient de là)
+      SPLAT_RADIUS: 0.16,         // tache plus compacte, moins nuage
+      SPLAT_FORCE: 3200,
+      SHADING: true,              // relief 3D "liquide" (les reflets irisés)
+      COLORFUL: true,             // teinte qui varie → franges arc-en-ciel
+      COLOR_UPDATE_SPEED: 10,
+      BLOOM: false,
+      SUNRAYS: false,
+      TRANSPARENT: true,          // canvas transparent au-dessus de la page
+      BACK_COLOR: { r: 255, g: 255, b: 255 },
     });
-    active = over;
-    canvas.classList.toggle('active', active);
+  } catch (err) {
+    return; // WebGL indisponible : pas d'effet, le site reste fonctionnel
   }
 
-  window.addEventListener('mousemove', evaluate);
+  // Le canvas est en pointer-events:none pour ne jamais bloquer les clics :
+  // on lui retransmet les mouvements de souris captés au niveau de la fenêtre.
+  window.addEventListener('mousemove', (e) => {
+    if (!e.isTrusted) return; // évite de re-capter nos propres événements
+    const ev = new MouseEvent('mousemove', {
+      clientX: e.clientX,
+      clientY: e.clientY,
+      bubbles: false,
+    });
+    // La librairie lit offsetX/offsetY ; le canvas couvrant tout l'écran,
+    // ils correspondent aux coordonnées client.
+    Object.defineProperty(ev, 'offsetX', { get: () => e.clientX });
+    Object.defineProperty(ev, 'offsetY', { get: () => e.clientY });
+    canvas.dispatchEvent(ev);
+  });
 }

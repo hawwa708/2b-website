@@ -12,12 +12,13 @@
   --grey-light: #F7F5F3;
   --border: #E0E0E0;
 
-  /* Fonds de section — rythme visuel de la page (jamais de fond sombre dominant) */
-  --bg-hero-top: #EAF2F6;     /* blanc légèrement bleuté (haut du hero) */
+  /* Fonds de section — rythme visuel de la page (jamais de fond sombre dominant).
+     Uniquement des teintes chaudes, dans la charte 2B (pas de bleu). */
+  --bg-hero-top: #F5F1ED;     /* blanc cassé chaud (haut du hero) */
   --bg-hero-bottom: #FFFFFF;  /* retour au blanc pur (bas du hero) */
   --bg-transition: #FDEEE4;   /* beige pêche clair (zone autour du bloc vidéo) */
   --bg-services: #FFFFFF;     /* blanc pur (section services / piliers) */
-  --bg-portfolio: #F7FAFB;    /* blanc grisé bleuté (portfolio / réalisations) */
+  --bg-portfolio: #F7F5F3;    /* gris chaud très clair (portfolio / réalisations) */
   --bg-content: #FFFFFF;      /* blanc pur (clients, blog) */
   --bg-footer: #FDEEE4;       /* beige pêche (contact final + footer) */
 
@@ -293,16 +294,19 @@ section { position: relative; }
 .mobile-submenu li a { display: block; padding: 10px 4px 10px 16px; color: var(--grey); font-size: 0.95rem; }
 .mobile-nav .btn { margin-top: 24px; width: 100%; justify-content: center; }
 
-/* ---------- Curseur canvas (lueur) ---------- */
+/* ---------- Curseur : simulation de fluide WebGL (eau irisée) ---------- */
 #cursor-glow {
   position: fixed;
   inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   z-index: 60;
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  /* Multiply : la tache reste un voile translucide pâle sur les fonds
+     clairs, avec les franges colorées visibles (aspect film d'eau savonneuse) */
+  mix-blend-mode: multiply;
+  opacity: 0.5;
 }
-#cursor-glow.active { opacity: 1; }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -357,7 +361,7 @@ section { position: relative; }
 .v-words {
   position: absolute; inset: 0;
   opacity: 0;
-  background: linear-gradient(160deg, #FDEEE4 0%, #F2F0EE 48%, #E4EEF6 100%);
+  background: linear-gradient(160deg, #FDEEE4 0%, #F5F1EE 48%, #EFECE8 100%);
   overflow: hidden;
 }
 .v-words-track {
