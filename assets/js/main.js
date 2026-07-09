@@ -1,6 +1,6 @@
-/* ==========================================================================
-   2B Business Booster — Script partagé (toutes les pages)
-   Dépendances CDN : GSAP, ScrollTrigger, Lenis (voir <script> en bas du HTML)
+﻿/* ==========================================================================
+   2B Business Booster â€” Script partagÃ© (toutes les pages)
+   DÃ©pendances CDN : GSAP, ScrollTrigger, Lenis (voir <script> en bas du HTML)
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -35,7 +35,7 @@ function initSmoothScroll() {
   window.__lenis = lenis;
 }
 
-/* ---------- Header : fond flouté dès le premier scroll ---------- */
+/* ---------- Header : fond floutÃ© dÃ¨s le premier scroll ---------- */
 function initHeaderScrollState() {
   const header = document.querySelector('.site-header');
   if (!header) return;
@@ -48,7 +48,7 @@ function initHeaderScrollState() {
   window.addEventListener('scroll', setState, { passive: true });
 }
 
-/* ---------- Navigation mobile (burger + sous-menus accordéon) ---------- */
+/* ---------- Navigation mobile (burger + sous-menus accordÃ©on) ---------- */
 function initMobileNav() {
   const toggle = document.querySelector('.nav-toggle');
   const nav = document.querySelector('.mobile-nav');
@@ -91,9 +91,9 @@ function initRevealAnimations() {
 }
 
 /* ----------------------------------------------------------------------
-   Hero : la vignette insérée dans le titre grandit au scroll jusqu'au
-   plein écran, puis SORT de l'écran par le haut pour libérer la page.
-   Un espace réservé (placeholder) invisible garde sa place dans le titre
+   Hero : la vignette insÃ©rÃ©e dans le titre grandit au scroll jusqu'au
+   plein Ã©cran, puis SORT de l'Ã©cran par le haut pour libÃ©rer la page.
+   Un espace rÃ©servÃ© (placeholder) invisible garde sa place dans le titre
    pour que le texte ne soit jamais recouvert.
    ---------------------------------------------------------------------- */
 function initHeroVignette() {
@@ -102,7 +102,7 @@ function initHeroVignette() {
   const hero = document.querySelector('.hero');
   if (!vignette || !hero) return;
 
-  // 1) Espace réservé dans le H1 : conserve la mise en page du texte
+  // 1) Espace rÃ©servÃ© dans le H1 : conserve la mise en page du texte
   const rect0 = vignette.getBoundingClientRect();
   const placeholder = document.createElement('span');
   placeholder.className = 'hero-vignette-placeholder';
@@ -111,7 +111,7 @@ function initHeroVignette() {
     'width:' + rect0.width + 'px;height:' + rect0.height + 'px;';
   vignette.after(placeholder);
 
-  // 2) La vignette passe en fixed, superposée exactement au placeholder
+  // 2) La vignette passe en fixed, superposÃ©e exactement au placeholder
   vignette.classList.add('hero-vignette-fixed');
   gsap.set(vignette, {
     position: 'fixed',
@@ -123,10 +123,10 @@ function initHeroVignette() {
     borderRadius: 16,
   });
 
-  // 3) Progression pilotée par le scroll :
-  //    0 → GROW_END        : croissance vers le grand bloc centré
-  //    GROW_END → EXIT_START : palier — le bloc reste affiché à sa taille
-  //    EXIT_START → 1      : sortie vers le haut (libère la page)
+  // 3) Progression pilotÃ©e par le scroll :
+  //    0 â†’ GROW_END        : croissance vers le grand bloc centrÃ©
+  //    GROW_END â†’ EXIT_START : palier â€” le bloc reste affichÃ© Ã  sa taille
+  //    EXIT_START â†’ 1      : sortie vers le haut (libÃ¨re la page)
   const GROW_END = 0.42;
   const EXIT_START = 0.72;
   const easeGrow = gsap.parseEase('power2.inOut');
@@ -144,8 +144,8 @@ function initHeroVignette() {
     const p = st.progress;
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    // Taille finale : grand bloc centré avec marges (référence upsunday),
-    // PAS un plein écran — le header et les bords de page restent visibles.
+    // Taille finale : grand bloc centrÃ© avec marges (rÃ©fÃ©rence upsunday),
+    // PAS un plein Ã©cran â€” le header et les bords de page restent visibles.
     const isMobile = vw < 700;
     const fullW = isMobile ? vw - 24 : Math.min(vw * 0.76, 1500);
     const fullH = isMobile ? vh * 0.62 : vh * 0.72;
@@ -157,7 +157,7 @@ function initHeroVignette() {
       r: 28,
     };
     // Position vivante du placeholder : la vignette suit le texte tant
-    // que la croissance n'a pas commencé, puis s'en détache en douceur.
+    // que la croissance n'a pas commencÃ©, puis s'en dÃ©tache en douceur.
     const startRect = placeholder.getBoundingClientRect();
 
     let top, left, w, h, r;
@@ -170,14 +170,14 @@ function initHeroVignette() {
       h = lerp(startRect.height, full.h, t);
       r = lerp(16, full.r, t);
     } else if (p <= EXIT_START) {
-      // Palier : le bloc reste affiché à sa taille finale
+      // Palier : le bloc reste affichÃ© Ã  sa taille finale
       top = full.top;
       left = full.left;
       w = full.w;
       h = full.h;
       r = full.r;
     } else {
-      // Phase de sortie : le grand bloc glisse vers le haut et libère la page
+      // Phase de sortie : le grand bloc glisse vers le haut et libÃ¨re la page
       const t = (p - EXIT_START) / (1 - EXIT_START);
       top = full.top - t * (full.top + full.h + 100);
       left = full.left;
@@ -195,9 +195,9 @@ function initHeroVignette() {
 }
 
 /* ----------------------------------------------------------------------
-   Diaporama interne de la vignette hero — boucle infinie, indépendante
-   du scroll : 3 images en cuts bruts rapides, puis séquence de mots 2B
-   en cascade diagonale sur fond dégradé clair (style upsunday).
+   Diaporama interne de la vignette hero â€” boucle infinie, indÃ©pendante
+   du scroll : 3 images en cuts bruts rapides, puis sÃ©quence de mots 2B
+   en cascade diagonale sur fond dÃ©gradÃ© clair (style upsunday).
    ---------------------------------------------------------------------- */
 function initVignetteSlideshow() {
   if (typeof gsap === 'undefined') return;
@@ -211,30 +211,30 @@ function initVignetteSlideshow() {
   if (!slides.length || !wordsPane) return;
 
   const IMG_DUR = 0.4;      // cuts bruts et rapides : pas de fondu, juste une coupe
-  const WORDS_SLIDE = 1.6;  // durée du trajet de chaque mot (gauche → droite)
-  const WORDS_STAGGER = 0.14; // départ décalé : le mot du haut part en premier
-  const WORDS_HOLD = 0.5;   // pause une fois la colonne alignée à droite
+  const WORDS_SLIDE = 1.6;  // durÃ©e du trajet de chaque mot (gauche â†’ droite)
+  const WORDS_STAGGER = 0.14; // dÃ©part dÃ©calÃ© : le mot du haut part en premier
+  const WORDS_HOLD = 0.5;   // pause une fois la colonne alignÃ©e Ã  droite
 
-  // Position de départ : TOUS les mots alignés en colonne au bord GAUCHE.
-  // (le décalage ramène le bord gauche de chaque mot sur la marge gauche)
+  // Position de dÃ©part : TOUS les mots alignÃ©s en colonne au bord GAUCHE.
+  // (le dÃ©calage ramÃ¨ne le bord gauche de chaque mot sur la marge gauche)
   const leftStart = (el) => -(wordsPane.clientWidth * 0.88 - el.offsetWidth);
 
   const tl = gsap.timeline({
     repeat: -1,
-    // Ré-évalue les décalages à chaque boucle (suit la taille réelle du bloc)
+    // RÃ©-Ã©value les dÃ©calages Ã  chaque boucle (suit la taille rÃ©elle du bloc)
     onRepeat: function () { this.invalidate(); },
   });
 
-  // Phase 1 : les 3 images en coupes sèches
+  // Phase 1 : les 3 images en coupes sÃ¨ches
   slides.forEach((slide) => {
     tl.set(slide, { autoAlpha: 1 });
     tl.set(slide, { autoAlpha: 0 }, '+=' + IMG_DUR);
   });
 
-  // Phase 2 : les mots démarrent TOUS alignés en colonne au bord gauche,
-  // puis glissent un à un vers la droite (celui du haut part en premier).
-  // À mi-parcours l'ensemble dessine l'escalier diagonal, et tout finit
-  // aligné en colonne verticale au bord droit.
+  // Phase 2 : les mots dÃ©marrent TOUS alignÃ©s en colonne au bord gauche,
+  // puis glissent un Ã  un vers la droite (celui du haut part en premier).
+  // Ã€ mi-parcours l'ensemble dessine l'escalier diagonal, et tout finit
+  // alignÃ© en colonne verticale au bord droit.
   tl.call(() => vignette.classList.add('words-on'));
   tl.set(shade, { display: 'none' });
   tl.set(wordsPane, { autoAlpha: 1 });
@@ -242,14 +242,14 @@ function initVignetteSlideshow() {
     { x: (i, el) => leftStart(el), autoAlpha: 1 },
     { x: 0, duration: WORDS_SLIDE, ease: 'power2.inOut', stagger: WORDS_STAGGER }
   );
-  // Légère descente de l'ensemble pendant le glissement (haut vers bas)
+  // LÃ©gÃ¨re descente de l'ensemble pendant le glissement (haut vers bas)
   tl.fromTo(track,
     { yPercent: -6 },
     { yPercent: 0, duration: WORDS_SLIDE + WORDS_STAGGER * (words.length - 1), ease: 'power2.inOut' },
     '<'
   );
-  // Retour aux images SANS trou noir : la 1re image est réaffichée
-  // avant de masquer le calque des mots (coupe sèche, aucun frame vide)
+  // Retour aux images SANS trou noir : la 1re image est rÃ©affichÃ©e
+  // avant de masquer le calque des mots (coupe sÃ¨che, aucun frame vide)
   tl.set(slides[0], { autoAlpha: 1 }, '+=' + WORDS_HOLD);
   tl.set(shade, { display: 'block' });
   tl.set(wordsPane, { autoAlpha: 0 });
@@ -278,42 +278,53 @@ function initPillarCarousels() {
 }
 
 /* ----------------------------------------------------------------------
-   Curseur "eau irisée" — simulation de fluide WebGL sur tout le site.
-   La souris laisse une tache liquide translucide aux reflets irisés qui
-   se déforme et se dissipe, comme un film d'eau savonneuse.
-   Librairie : webgl-fluid (assets/js/vendor/webgl-fluid.umd.js).
+   Curseur "film d'eau" — simulation de fluide WebGL (webgl-fluid-enhanced).
+   Deux verrous rendent le "disco" impossible :
+   - brightness : plafonne la luminosité du rendu, quelle que soit la
+     quantité d'encre accumulée en repassant au même endroit ;
+   - colorPalette : uniquement l'orange 2B et ses déclinaisons claires.
+   Combiné au mix-blend-mode multiply (CSS), le calque ne peut que
+   teinter/assombrir la page — jamais l'éclairer.
    ---------------------------------------------------------------------- */
 function initCursorGlow() {
-  const canvas = document.getElementById('cursor-glow');
-  if (!canvas || typeof WebGLFluid === 'undefined') return;
+  const container = document.getElementById('cursor-glow');
+  if (!container || typeof WebGLFluidEnhanced === 'undefined') return;
 
+  // Le bundle UMD expose un objet { WebGLFluidEnhanced, default, ... }
+  const Ctor = WebGLFluidEnhanced.WebGLFluidEnhanced || WebGLFluidEnhanced.default || WebGLFluidEnhanced;
+
+  let fluid;
   try {
-    WebGLFluid(canvas, {
-      TRIGGER: 'hover',        // réagit au simple survol, pas besoin de cliquer
-      IMMEDIATE: false,        // pas de splash aléatoire au chargement
-      AUTO: false,             // pas de splash automatique périodique
-      SIM_RESOLUTION: 128,
-      DYE_RESOLUTION: 1024,
-      DENSITY_DISSIPATION: 1.8,   // le film d'eau persiste un peu puis s'évapore
-      VELOCITY_DISSIPATION: 2.8,  // le mouvement s'amortit vite → pas de volutes de fumée
-      PRESSURE: 0.85,             // fluide plus "incompressible" → comportement liquide
-      CURL: 2,                    // quasi pas de turbulence (la fumée vient de là)
-      SPLAT_RADIUS: 0.16,         // tache plus compacte, moins nuage
-      SPLAT_FORCE: 3200,
-      SHADING: true,              // relief 3D "liquide" (les reflets irisés)
-      COLORFUL: true,             // teinte qui varie → franges arc-en-ciel
-      COLOR_UPDATE_SPEED: 10,
-      BLOOM: false,
-      SUNRAYS: false,
-      TRANSPARENT: true,          // canvas transparent au-dessus de la page
-      BACK_COLOR: { r: 255, g: 255, b: 255 },
+    fluid = new Ctor(container);
+    fluid.setConfig({
+      hover: true,                // réagit au survol, sans clic
+      simResolution: 128,
+      dyeResolution: 1024,
+      densityDissipation: 1.0,    // la nappe s'étale puis s'estompe
+      velocityDissipation: 2.3,   // le courant s'amortit vite (pas de volutes)
+      pressure: 0.8,              // comportement liquide, incompressible
+      curl: 3,                    // très peu de turbulence
+      splatRadius: 0.5,           // grandes injections → nappe large et douce
+      splatForce: 5500,
+      colorful: false,            // pas de dérive de teinte : palette stricte
+      colorPalette: ['#E25B3B', '#E8825F', '#F2A98E', '#F6C4B0'],
+      brightness: 0.22,           // PLAFOND de luminosité : tue le "disco"
+      colorUpdateSpeed: 6,
+      shading: true,              // relief liquide (ombres douces)
+      bloom: false,
+      sunrays: false,
+      transparent: true,          // canvas transparent au-dessus de la page
     });
+    fluid.start();
   } catch (err) {
     return; // WebGL indisponible : pas d'effet, le site reste fonctionnel
   }
 
-  // Le canvas est en pointer-events:none pour ne jamais bloquer les clics :
-  // on lui retransmet les mouvements de souris captés au niveau de la fenêtre.
+  // La librairie écoute sur SON canvas (créé dans le conteneur), qui est en
+  // pointer-events:none pour ne jamais bloquer les clics : on lui
+  // retransmet les mouvements de souris captés au niveau de la fenêtre.
+  const canvas = container.querySelector('canvas');
+  if (!canvas) return;
   window.addEventListener('mousemove', (e) => {
     if (!e.isTrusted) return; // évite de re-capter nos propres événements
     const ev = new MouseEvent('mousemove', {

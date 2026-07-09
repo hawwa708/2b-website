@@ -29,8 +29,10 @@
 </head>
 <body>
 
-  <!-- Curseur lueur (canvas plein écran, actif sur fonds sombres uniquement) -->
-  <canvas id="cursor-glow" aria-hidden="true"></canvas>
+  <!-- Curseur : simulation de fluide WebGL (webgl-fluid-enhanced) — film
+       d'eau mat aux teintes orange 2B, luminosité plafonnée (voir main.js).
+       La librairie crée son canvas à l'intérieur de ce conteneur. -->
+  <div id="cursor-glow" aria-hidden="true"></div>
 
   <!-- ===================== HEADER ===================== -->
   <header class="site-header">
@@ -416,8 +418,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-  <!-- Simulation de fluide WebGL (effet curseur "eau irisée") — auto-hébergée -->
-  <script src="assets/js/vendor/webgl-fluid.umd.js"></script>
+  <!-- Simulation de fluide WebGL (effet curseur film d'eau) — auto-hébergée -->
+  <script src="assets/js/vendor/webgl-fluid-enhanced.umd.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

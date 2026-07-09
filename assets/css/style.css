@@ -294,19 +294,24 @@ section { position: relative; }
 .mobile-submenu li a { display: block; padding: 10px 4px 10px 16px; color: var(--grey); font-size: 0.95rem; }
 .mobile-nav .btn { margin-top: 24px; width: 100%; justify-content: center; }
 
-/* ---------- Curseur : simulation de fluide WebGL (eau irisée) ---------- */
+/* ---------- Curseur : fluide WebGL "film d'eau" (webgl-fluid-enhanced) ----------
+   La luminosité du rendu est plafonnée dans la config JS (brightness) et
+   la palette est limitée aux oranges 2B : l'accumulation d'encre ne peut
+   plus produire de cœur lumineux. Le multiply garantit en plus que le
+   calque ne peut que teinter/assombrir, jamais éclairer.
+   Les !important neutralisent les styles inline posés par la librairie
+   sur son conteneur (elle le passe en position:relative). */
 #cursor-glow {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
   z-index: 60;
-  /* Multiply : la tache reste un voile translucide pâle sur les fonds
-     clairs, avec les franges colorées visibles (aspect film d'eau savonneuse) */
   mix-blend-mode: multiply;
-  opacity: 0.5;
+  opacity: 0.85;
 }
+#cursor-glow canvas { pointer-events: none !important; }
 
 /* ---------- Hero ---------- */
 .hero {
