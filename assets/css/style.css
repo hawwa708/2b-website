@@ -64,6 +64,10 @@ h1, h2, h3, h4 {
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 20px;
+  /* Au-dessus du calque curseur (#cursor-glow à z:1) : le contenu passe
+     devant l'effet d'eau, qui ne vit que sur les fonds */
+  position: relative;
+  z-index: 2;
 }
 section { position: relative; }
 
@@ -307,9 +311,11 @@ section { position: relative; }
   width: 100% !important;
   height: 100% !important;
   pointer-events: none !important;
-  z-index: 60;
+  /* Entre les fonds de section (z auto) et le contenu (.container à z:2) :
+     l'eau coule sur le background, DERRIÈRE textes, cartes et images */
+  z-index: 1;
   mix-blend-mode: multiply;
-  opacity: 0.85;
+  opacity: 1;
 }
 #cursor-glow canvas { pointer-events: none !important; }
 
@@ -422,7 +428,9 @@ section { position: relative; }
   height: 60px;
   width: 100%;
   line-height: 0;
-  z-index: 2;
+  /* z:0 : au-dessus du fond de la section précédente (ordre du document)
+     mais SOUS le calque d'eau (z:1) — la courbe fait partie du background */
+  z-index: 0;
   pointer-events: none;
 }
 .curve-top svg { width: 100%; height: 100%; display: block; }
@@ -554,6 +562,100 @@ section { position: relative; }
 .cta-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 32px; }
 .cta-final .btn-ghost { border-color: var(--border); color: var(--black); }
 .cta-final .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+
+/* ---------- Pages intérieures : hero réduit ---------- */
+.page-hero {
+  position: relative;
+  padding: calc(var(--header-h) + 70px) 0 90px;
+  background: linear-gradient(180deg,
+    var(--bg-hero-top) 0%,
+    var(--bg-hero-bottom) 55%,
+    var(--bg-transition) 100%);
+}
+.page-hero .section-tag { display: block; margin-bottom: 18px; }
+.page-hero h1 {
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: clamp(1.9rem, 4.4vw, 3.3rem);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  max-width: 920px;
+}
+.page-hero .hero-text { margin-top: 22px; }
+.page-hero .hero-cta { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* ---------- Pages intérieures : blocs de contenu ---------- */
+/* Texte + image côte à côte */
+.about-split { display: grid; gap: 36px; align-items: center; }
+.about-split img { width: 100%; border-radius: 18px; display: block; box-shadow: 0 18px 44px rgba(9,9,9,0.10); }
+.about-split .split-text p { color: var(--grey); margin-bottom: 16px; }
+.about-split .split-text p strong { color: var(--black); }
+
+/* Cartes valeurs */
+.values-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
+.value-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 30px 26px;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.value-card:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(9,9,9,0.08); }
+.value-card svg { width: 36px; height: 36px; stroke: var(--orange); stroke-width: 1.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.value-card h3 { font-size: 1.06rem; margin: 16px 0 8px; }
+.value-card p { color: var(--grey); font-size: 0.95rem; }
+
+/* Carte équipe / dirigeante */
+.team-card {
+  display: grid;
+  gap: 28px;
+  align-items: center;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+}
+.team-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 16px; display: block; }
+.team-role {
+  display: block;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 6px;
+}
+.team-card h3 { font-size: 1.35rem; margin-bottom: 10px; }
+.team-card p { color: var(--grey); }
+
+/* Mini-cartes de liens (maillage interne vers les piliers) */
+.mini-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
+.mini-card {
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 26px;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.mini-card:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(9,9,9,0.08); border-color: var(--orange); }
+.mini-card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.mini-card p { color: var(--grey); font-size: 0.95rem; margin-bottom: 14px; }
+.mini-card .read-more { font-family: var(--font-title); font-weight: 700; font-size: 0.85rem; color: var(--black); }
+.mini-card:hover .read-more { color: var(--orange); }
+
+@media (min-width: 700px) {
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+  .team-card { grid-template-columns: 240px 1fr; }
+}
+@media (min-width: 960px) {
+  .about-split { grid-template-columns: 1.05fr 0.95fr; }
+  .mini-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1180px) {
+  .values-grid { grid-template-columns: repeat(4, 1fr); }
+}
 
 /* ---------- Footer ---------- */
 /* Même beige pêche que la section contact : ferme le rythme visuel de la page */

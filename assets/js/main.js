@@ -308,7 +308,9 @@ function initCursorGlow() {
       splatForce: 5500,
       colorful: false,            // pas de dérive de teinte : palette stricte
       colorPalette: ['#E25B3B', '#E8825F', '#F2A98E', '#F6C4B0'],
-      brightness: 0.22,           // PLAFOND de luminosité : tue le "disco"
+      brightness: 0.35,           // PLAFOND de luminosité : tue le "disco"
+                                  // (plus haut = nappe plus visible, sans
+                                  // risque de néon grâce au multiply CSS)
       colorUpdateSpeed: 6,
       shading: true,              // relief liquide (ombres douces)
       bloom: false,
