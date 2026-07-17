@@ -6,7 +6,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Site vitrine multi-pages de **2B Business Booster** (cabinet de conseil / agence de communication, Dakar). HTML/CSS/JS vanilla, **sans framework ni build tool** — les fichiers sont servis tels quels. Tout le contenu est en français. Le client valide chaque page avant de passer à la suivante.
 
-État : `index.html` livré et validé ; `2b-en-bref.html` construite (en attente de validation client). **14 pages restantes** (3 pages piliers + 9 sous-pages, blog, contacts) — URLs, title/meta, H1/H2, mots-clés et maillage interne de chaque page sont définis dans le cahier des charges SEO fourni par le client (PDF, hors repo). Ordre de construction : pilier puis ses 3 sous-pages, en commençant par Conseils et Consultance.
+État : `index.html` livré et validé ; `2b-en-bref.html` construite (en attente de validation client). **14 pages restantes** (3 pages piliers + 9 sous-pages, blog, contacts) — URLs, title/meta, H1/H2, mots-clés et maillage interne de chaque page sont définis dans le cahier des charges SEO fourni par le client (PDF, hors repo), **amendé par les décisions du CR du 10/07/2026 ci-dessous**. Ordre de construction : pilier puis ses 3 sous-pages, en commençant par Conseils et Consultance.
+
+## Décisions stratégie digitale (CR réunion DG du 10/07/2026)
+
+Amendements au cahier des charges SEO, validés par la Direction Générale — à appliquer sur toute page, existante ou nouvelle :
+
+- **Cibles élargies** : dirigeants de PME, porteurs de projet et organisations — explicitement associations, ONG et État/institutions publiques (agréments, présidence). Ne plus écrire seulement « entrepreneurs et PME ». Formulation retenue pour le copy visible : « associations, ONG et institutions ».
+- **Ligne éditoriale orientée résultats** : mettre en avant les résultats commerciaux (clients obtenus, ventes, chiffre d'affaires), pas seulement la visibilité/notoriété.
+- **Blog** (future `blog.html`) : cadence 2 articles + 1 étude de cas par mois → prévoir une rubrique/un filtre « Études de cas » dans le gabarit.
+- **Mots-clés SEO confirmés comme axe stratégique** : « agence de communication à Dakar », « business plan Sénégal / Dakar » (en complément du cahier des charges SEO).
+- **Team building / marketing événementiel** : nouveau volet à part entière → à développer dans la future page `evenementiel.html` ; déjà mentionné dans les descriptions du pôle Communication 360° sur les pages existantes.
+- **Baseline de marque** : non tranchée (la DG cherche un adjectif alliant présence et qualité). Ne rien inventer ; conserver « 2B, une expertise pour votre succès ! » en attendant.
+- **Google Analytics** : pas encore en place. Ajouter le tag GA4 sur toutes les pages quand le client fournira l'ID de mesure — ne rien ajouter avant.
 
 ## Commandes
 
@@ -41,4 +53,4 @@ Simulation de fluide `webgl-fluid-enhanced` (global `WebGLFluidEnhanced`, API `n
 
 ## SEO (à coder dans chaque nouvelle page, pas à corriger après)
 
-Un seul `<h1>` avec le mot-clé principal ; "Dakar" ou "Sénégal" dans les 100 premiers mots ; `<title>` ≤ 60 caractères et meta description ≤ 160 (valeurs déjà rédigées dans le cahier des charges SEO — les reprendre telles quelles) ; `alt` descriptif sur chaque image ; JSON-LD Organization + LocalBusiness avec le NAP exact (Rue Tolbiac x Brazza, Dakar ; +221 77 193 43 43 ; info@businessbooster.sn) identique sur toutes les pages ; CTA "Demander un devis" fixe dans le header ; bouton WhatsApp flottant (https://wa.me/221771934343).
+Un seul `<h1>` avec le mot-clé principal ; "Dakar" ou "Sénégal" dans les 100 premiers mots ; `<title>` ≤ 60 caractères et meta description ≤ 160 (valeurs déjà rédigées dans le cahier des charges SEO — les reprendre telles quelles, en élargissant « PME » aux cibles du CR 10/07/2026 quand la longueur le permet) ; `alt` descriptif sur chaque image ; JSON-LD Organization + LocalBusiness avec le NAP exact (Rue Tolbiac x Brazza, Dakar ; +221 77 193 43 43 ; info@businessbooster.sn) identique sur toutes les pages ; CTA "Demander un devis" fixe dans le header ; bouton WhatsApp flottant (https://wa.me/221771934343).
