@@ -23,7 +23,7 @@ Amendements au cahier des charges SEO, validés par la Direction Générale — 
 ## Commandes
 
 - **Prévisualisation locale** : serveur PowerShell HttpListener sur **http://localhost:8080** (script `C:\Users\awagu\2b-preview-server.ps1`, lancé automatiquement à l'ouverture de session via `shell:startup\2b-preview-server.vbs`). Python/Node ne sont **pas installés** sur cette machine. S'il ne répond pas : `Start-Process powershell -ArgumentList "-NoProfile","-ExecutionPolicy","Bypass","-File","$env:USERPROFILE\2b-preview-server.ps1" -WindowStyle Hidden`
-- **Publication** : `git push` → GitHub Pages (repo `hawwa708/2b-website`, branche `main`, racine) → https://hawwa708.github.io/2b-website/ (1-2 min de délai). **Ne jamais pousser sans demande explicite du client** ("publie" / "mets en ligne").
+- **Publication** : `git push` → GitHub Pages (repo `hawwa708/2b-website`, branche `main`, racine) → https://hawwa708.github.io/2b-website/ (1-2 min de délai). **Ne jamais pousser sans demande explicite du client** ("publie" / "mets en ligne"). GitHub Pages = **préproduction pour la validation client** ; le site sera ensuite migré sur le vrai domaine (www.businessbooster.sn — les canonicals pointent déjà dessus, ce qui évite l'indexation de la préprod).
 
 ## Architecture
 
