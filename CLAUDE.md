@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Site vitrine multi-pages de **2B Business Booster** (cabinet de conseil / agence de communication, Dakar). HTML/CSS/JS vanilla, **sans framework ni build tool** — les fichiers sont servis tels quels. Tout le contenu est en français. Le client valide chaque page avant de passer à la suivante.
 
-État : `index.html` livré et validé ; `2b-en-bref.html` construite (en attente de validation client). **14 pages restantes** (3 pages piliers + 9 sous-pages, blog, contacts) — URLs, title/meta, H1/H2, mots-clés et maillage interne de chaque page sont définis dans le cahier des charges SEO fourni par le client (PDF, hors repo), **amendé par les décisions du CR du 10/07/2026 ci-dessous**. Ordre de construction : pilier puis ses 3 sous-pages, en commençant par Conseils et Consultance.
+État : **site complet construit (20 pages)** — accueil (validée), 2B en bref, 3 piliers, 9 sous-pages, blog + 3 articles, contacts, mentions légales (noindex). Tout sauf l'accueil est **en attente de validation client** ; rien n'a été poussé. URLs, title/meta, H1/H2, mots-clés et maillage interne viennent du cahier des charges SEO du client, désormais dans le repo (`CAHIER DE CHARGE SEO 2B.docx`, avec une section « Amendements CR 10/07/2026 » ajoutée en fin de document) — le docx est la source de vérité, ses valeurs ont été reprises telles quelles, amendées par le CR ci-dessous. Reste à faire plus tard : brancher le vrai formulaire de contact (un bloc `.form-placeholder` réserve l'espace sur `contacts.html` avec un commentaire HTML explicatif), remplacer les photos Unsplash par les visuels du client, faire relire l'étude de cas WIC Women's Day (écrite prudemment, sans chiffres inventés — à enrichir avec les faits réels), ajouter le tag GA4 quand l'ID existera.
 
 ## Décisions stratégie digitale (CR réunion DG du 10/07/2026)
 
@@ -34,7 +34,7 @@ Pas de templating : le header (barre flottante), le footer (NAP + JSON-LD Organi
 - `assets/js/vendor/webgl-fluid-enhanced.umd.js` — seule lib auto-hébergée (effet curseur)
 - `assets/img/` — `logo-2b.png` (logo officiel) et `favicon.png` (symbole recadré du logo)
 
-Gabarits pages intérieures déjà dans `style.css` (voir `2b-en-bref.html` comme référence) : `.page-hero` (hero réduit avec dégradé), `.about-split` (texte + image), `.values-grid`/`.value-card`, `.team-card`, `.mini-grid`/`.mini-card` (maillage interne vers d'autres pages).
+Gabarits pages intérieures déjà dans `style.css` (voir `2b-en-bref.html` comme référence) : `.page-hero` (hero réduit avec dégradé), `.about-split` (texte + image), `.values-grid`/`.value-card`, `.team-card`, `.mini-grid`/`.mini-card` (maillage interne vers d'autres pages). Ajoutés ensuite : `.article-body`/`.article-meta` (corps d'article blog), `.faq-list` (accordéon natif `<details>`, sans JS), `.steps-list` (étapes numérotées), `.form-placeholder` (espace formulaire réservé), `.map-embed` (iframe carte, filtre chaud anti-bleu) ; `.mini-card h2`/`.value-card h2` permettent de vrais H2 dans les cartes quand la structure SEO l'exige.
 
 **Empilement (z-index)** : l'effet curseur vit à `z:1`, SOUS le contenu — `.container` est à `position:relative; z-index:2` et `.curve-top` à `z:0`. Tout contenu d'une nouvelle section doit être dans un `.container` (sinon l'eau du curseur passera devant).
 
