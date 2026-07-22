@@ -99,7 +99,7 @@ section { position: relative; }
 .section-lead {
   color: var(--grey);
   font-size: 1.05rem;
-  max-width: 620px;
+  max-width: 720px;
 }
 .center { text-align: center; }
 .section-head { margin-bottom: 48px; }
@@ -415,7 +415,7 @@ section { position: relative; }
 }
 .hero-vignette-fixed.is-full .hero-vignette-caption { opacity: 1; }
 
-.hero-text { font-size: clamp(1.02rem, 1.6vw, 1.2rem); color: var(--grey); margin-top: 26px; max-width: 640px; }
+.hero-text { font-size: clamp(1.02rem, 1.6vw, 1.2rem); color: var(--grey); margin-top: 26px; max-width: 920px; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 36px; }
 .hero-spacer { height: 60vh; }
 
@@ -834,6 +834,25 @@ section { position: relative; }
 .form-placeholder h3 { font-size: 1.15rem; margin-bottom: 10px; }
 .form-placeholder p { color: var(--grey); max-width: 460px; margin: 0 auto 24px; }
 .form-placeholder .cta-actions { margin-top: 0; }
+
+/* ---------- Textes justifiés (demande client du 22/07/2026) ----------
+   Les blocs centrés (section-head.center, cta-final) restent centrés :
+   la justification y laisserait la dernière ligne collée à gauche. */
+.hero-text,
+.section-head:not(.center) .section-lead,
+.about-split .split-text p,
+.article-body p,
+.article-body li,
+.faq-list details p,
+.steps-list p,
+.value-card p,
+.mini-card p,
+.blog-card .body p,
+.team-card p,
+.footer-brand p {
+  text-align: justify;
+  hyphens: auto;
+}
 
 /* ---------- Carte (iframe) : teinte chaude, pas de bleus criards ---------- */
 .map-embed {
