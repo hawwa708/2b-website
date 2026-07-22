@@ -46,6 +46,7 @@ Gabarits pages intérieures déjà dans `style.css` (voir `2b-en-bref.html` comm
 - **Typo** : Raleway 600/700 (titres), Roboto 300/400 (corps), avec `font-variant-numeric: lining-nums tabular-nums` hérité du body (chiffres Raleway old-style refusés).
 - **Courbes de section** : `.curve-top` (top:-58px), path `M0,60 C360,0 1080,0 1440,60 Z` rempli avec la couleur de SA PROPRE section (chevauche la précédente).
 - **Nav desktop** : n'apparaît qu'à ≥1280px (en dessous : burger) ; flex uniquement sur `.main-nav > ul`, items en nowrap.
+- **Textes justifiés** (retour client 22/07/2026) : les paragraphes courants sont en `text-align: justify` + `hyphens: auto` (bloc dédié dans style.css) ; les blocs centrés (`.section-head.center`, `.cta-final`) restent centrés. `.hero-text` fait 920px de large (aligné sur le H1 des pages intérieures), `.section-lead` 720px — ne pas recréer de colonne de texte étroite avec un grand vide à droite.
 
 ## Effet curseur — sujet sensible
 
