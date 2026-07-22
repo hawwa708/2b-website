@@ -33,6 +33,7 @@ Pas de templating : le header (barre flottante), le footer (NAP + JSON-LD Organi
 - `assets/js/main.js` — script unique partagé : init Lenis + GSAP/ScrollTrigger (CDN), header, nav mobile, reveals, animations du hero, carrousels, effet curseur. Chaque init vérifie la présence de ses éléments : les pages sans hero/carrousel fonctionnent sans modification du JS.
 - `assets/js/vendor/webgl-fluid-enhanced.umd.js` — seule lib auto-hébergée (effet curseur)
 - `assets/img/` — `logo-2b.png` (logo officiel) et `favicon.png` (symbole recadré du logo)
+- `assets/img/clients/` — 28 logos clients optimisés (112px de haut max, slugs propres) affichés dans le mur `.clients-logos` de l'accueil (gris par défaut, couleur au survol). Les fichiers sources fournis par le client sont dans `originaux/` (gitignoré) ; script de régénération : `optimize-logos.ps1` (scratchpad de session, à recréer au besoin via System.Drawing).
 
 Gabarits pages intérieures déjà dans `style.css` (voir `2b-en-bref.html` comme référence) : `.page-hero` (hero réduit avec dégradé), `.about-split` (texte + image), `.values-grid`/`.value-card`, `.team-card`, `.mini-grid`/`.mini-card` (maillage interne vers d'autres pages). Ajoutés ensuite : `.article-body`/`.article-meta` (corps d'article blog), `.faq-list` (accordéon natif `<details>`, sans JS), `.steps-list` (étapes numérotées), `.form-placeholder` (espace formulaire réservé), `.map-embed` (iframe carte, filtre chaud anti-bleu) ; `.mini-card h2`/`.value-card h2` permettent de vrais H2 dans les cartes quand la structure SEO l'exige.
 
