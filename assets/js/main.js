@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initVignetteSlideshow();
   initPillarCarousels();
   initCursorGlow();
+  initContactForm();
 });
 
 /* ---------- Lenis smooth scroll + sync GSAP ScrollTrigger ---------- */
@@ -339,5 +340,47 @@ function initCursorGlow() {
     Object.defineProperty(ev, 'offsetX', { get: () => e.clientX });
     Object.defineProperty(ev, 'offsetY', { get: () => e.clientY });
     canvas.dispatchEvent(ev);
+  });
+}
+
+/* ---------- Formulaire de contact (contacts.html) — envoi AJAX via FormSubmit ---------- */
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  const status = form.querySelector('.form-status');
+  const button = form.querySelector('button[type="submit"]');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const initialLabel = button.textContent;
+    button.disabled = true;
+    button.textContent = 'Envoi en cours…';
+    status.hidden = true;
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/awa.gueye@businessbooster.sn', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form)
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      form.reset();
+      status.textContent = 'Merci ! Votre demande a bien été envoyée — nous revenons vers vous sous 24h ouvrées.';
+      status.classList.remove('is-error');
+    } catch (err) {
+      status.textContent = "L'envoi a échoué. Réessayez dans un instant, ou écrivez-nous directement à info@businessbooster.sn ou sur WhatsApp.";
+      status.classList.add('is-error');
+    } finally {
+      status.hidden = false;
+      button.disabled = false;
+      button.textContent = initialLabel;
+    }
   });
 }

@@ -183,21 +183,75 @@
           <span class="section-tag">Écrivez-nous</span>
           <h2 class="section-title">Formulaire de contact</h2>
         </div>
-        <!-- ESPACE RÉSERVÉ AU FORMULAIRE (décision client du 17/07/2026 : à brancher plus tard).
-             Le futur formulaire (nom, entreprise, besoin, téléphone — cf. cahier des charges SEO)
-             remplacera ce bloc .form-placeholder, avec un service d'envoi à définir (FormSubmit,
-             Formspree ou backend). Bouton d'envoi prévu : « Envoyer ma demande ». -->
-        <div class="form-placeholder reveal">
-          <h3>Le formulaire en ligne arrive bientôt</h3>
-          <p>
-            En attendant, le plus rapide reste WhatsApp ou l'e-mail : décrivez-nous votre besoin,
-            nous revenons vers vous sous 24h ouvrées avec une proposition.
-          </p>
-          <div class="cta-actions">
-            <a href="mailto:info@businessbooster.sn?subject=Demande%20de%20devis" class="btn btn-primary">Envoyer ma demande par e-mail</a>
-            <a href="https://wa.me/221771934343" class="btn btn-ghost" target="_blank" rel="noopener">Nous écrire sur WhatsApp</a>
+        <!-- Formulaire de demande de devis — envoi via FormSubmit en AJAX (site statique, sans backend).
+             Adresse principale : awa.gueye@businessbooster.sn (c'est elle qui reçoit l'e-mail
+             d'activation FormSubmit à la toute première soumission — cliquer une fois sur le lien).
+             Les autres destinataires sont en copie via le champ _cc ci-dessous. -->
+        <form class="contact-form reveal" id="contact-form" novalidate>
+          <input type="hidden" name="_subject" value="Demande de devis — site 2B Business Booster">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_cc" value="valimata.gueye@businessbooster.sn,awa.carrere@businessbooster.sn,info@businessbooster.sn">
+          <div class="form-row">
+            <div class="form-field">
+              <label for="cf-prenom">Prénom <span class="req">*</span></label>
+              <input type="text" id="cf-prenom" name="Prénom" autocomplete="given-name" required>
+            </div>
+            <div class="form-field">
+              <label for="cf-nom">Nom <span class="req">*</span></label>
+              <input type="text" id="cf-nom" name="Nom" autocomplete="family-name" required>
+            </div>
           </div>
-        </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="cf-entreprise">Entreprise / Organisation</label>
+              <input type="text" id="cf-entreprise" name="Entreprise" autocomplete="organization">
+            </div>
+            <div class="form-field">
+              <label for="cf-telephone">Téléphone <span class="req">*</span></label>
+              <input type="tel" id="cf-telephone" name="Téléphone" autocomplete="tel" required>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="cf-email">E-mail <span class="req">*</span></label>
+            <input type="email" id="cf-email" name="E-mail" autocomplete="email" required>
+          </div>
+          <div class="form-field">
+            <label for="cf-besoin">Votre besoin <span class="req">*</span></label>
+            <select id="cf-besoin" name="Besoin" required>
+              <option value="" selected disabled>Choisissez un service…</option>
+              <optgroup label="Conseils et Consultance">
+                <option>Business plan</option>
+                <option>Conseils stratégiques</option>
+                <option>Développement commercial</option>
+              </optgroup>
+              <optgroup label="Communication 360°">
+                <option>Identité visuelle &amp; design graphique</option>
+                <option>Communication</option>
+                <option>Événementiel / team building</option>
+              </optgroup>
+              <optgroup label="Formation et Coaching">
+                <option>Booster son entreprise</option>
+                <option>Communication digitale</option>
+                <option>Développement personnel</option>
+              </optgroup>
+              <option>Autre besoin</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="Message" rows="6" placeholder="Décrivez-nous votre projet ou votre besoin…"></textarea>
+          </div>
+          <!-- Piège anti-spam : champ invisible pour les humains, rempli par les robots -->
+          <input type="text" name="_honey" class="form-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p class="form-note"><span class="req">*</span> Champs obligatoires — réponse sous 24h ouvrées.</p>
+          <button type="submit" class="btn btn-primary">Envoyer ma demande</button>
+          <p class="form-status" role="status" aria-live="polite" hidden></p>
+        </form>
+        <p class="form-alt reveal">
+          Vous préférez un contact direct ? Écrivez-nous sur
+          <a href="https://wa.me/221771934343" target="_blank" rel="noopener">WhatsApp</a>
+          ou à <a href="mailto:info@businessbooster.sn">info@businessbooster.sn</a>.
+        </p>
       </div>
     </section>
 
